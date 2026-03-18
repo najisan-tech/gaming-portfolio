@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaming Portfolio</title>
+
+<style>
+* {margin:0; padding:0; box-sizing:border-box;}
+body {
+  font-family: 'Segoe UI', sans-serif;
+  color:white;
+  overflow-x:hidden;
+  background: url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  cursor:none;
+}
+
+.overlay {
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.85));
+  z-index:-1;
+}
+
+header {
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+header h1 {
+  font-size:70px;
+  background: linear-gradient(90deg, #00f0ff, #ff00c8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+header p {
+  font-size:22px;
+  opacity:0.8;
+  margin-top:10px;
+}
+
+section {
+  padding:80px 20px;
+  max-width:1100px;
+  margin:auto;
+}
+
+h2 {
+  margin-bottom:30px;
+  font-size:32px;
+  border-left:4px solid #ff00c8;
+  padding-left:10px;
+}
+
+.games {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  gap:25px;
+}
+
+.card {
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border-radius:20px;
+  overflow:hidden;
+  transition:0.4s;
+  position:relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.card::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:20px;
+  padding:1px;
+  background: linear-gradient(120deg, #00f0ff, #ff00c8);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 0 40px rgba(0,255,255,0.35), 0 0 60px rgba(255,0,200,0.25);
+}
+
+.card img {
+  width:100%;
+  height:160px;
+  object-fit:cover;
+}
+
+.card-content { padding:18px; }
+.card h3 { margin-bottom:8px; }
+.stars { color:#ffd700; margin:8px 0; }
+.card p { font-size:14px; opacity:0.85; margin:4px 0; }
+
+.reveal { opacity:0; transform:translateY(40px); transition:0.8s; }
+.reveal.active { opacity:1; transform:translateY(0); }
+
+#particles { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-3; }
+
+.cursor {
+  position: fixed; width:20px; height:20px; border:2px solid #00f0ff;
+  border-radius:50%; transform:translate(-50%,-50%); pointer-events:none; z-index:9999;
+}
+.cursor-glow {
+  position: fixed; width:40px; height:40px; border-radius:50%;
+  background: rgba(0,255,255,0.2); filter:blur(10px);
+  transform:translate(-50%,-50%); pointer-events:none; z-index:9998;
+}
+
+/* overlay for first click music */
+#startOverlay {
+  position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8);
+  display:flex; justify-content:center; align-items:center; color:white; font-size:24px; z-index:9999; cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<div id="startOverlay">Click Anywhere to Start </div>
+
+<div class="cursor"></div>
+<div class="cursor-glow"></div>
+<canvas id="particles"></canvas>
+
+<div class="overlay"></div>
+
+<header class="reveal">
+  <h1>naji_san</h1>
+  <p>Gamer | RPG | FPS</p>
+</header>
+
+<section class="reveal">
+  <h2>🎮 Games</h2>
+  <div class="games">
+
+    <!-- Game cards -->
+    <div class="card"><div class="card-inner"><img src="images/witcher.jpg"><div class="card-content"><h3>The Witcher 3</h3><div class="stars">★★★★★</div><p>⏱ 3.2 hours</p></div></div></div>
+    <div class="card"><div class="card-inner"><img src="images/arena.jpg"><div class="card-content"><h3>Arena Breakout: Infinite 🔥</h3><div class="stars">★★★★★</div><p>⏱ 1500+ hours</p></div></div></div>
+    <div class="card"><div class="card-inner"><img src="images/ark.jpg"><div class="card-content"><h3>ARK Survival Evolved</h3><div class="stars">★★★★☆</div><p>⏱ 19 hours</p></div></div></div>
+    <div class="card"><div class="card-inner"><img src="images/bfv.jpg"><div class="card-content"><h3>Battlefield V</h3><div class="stars">★★★★☆</div><p>⏱ 5.4 hours</p></div></div></div>
+    <div class="card"><div class="card-inner"><img src="images/dbd.jpg"><div class="card-content"><h3>Dead by Daylight</h3><div class="stars">★★★★☆</div></div></div></div>
+    <div class="card"><div class="card-inner"><img src="images/gta.jpg"><div class="card-content"><h3>GTA V</h3><div class="stars">★★★★★</div><p>⏱ 35.5 hours</p></div></div></div>
+    <div class="card"><div class="card-inner"><img src="images/oncehuman.jpg"><div class="card-content"><h3>Once Human</h3><div class="stars">★★★★☆</div><p>⏱ 14 hours</p></div></div></div>
+    <div class="card"><div class="card-inner"><img src="images/phasma.jpg"><div class="card-content"><h3>Phasmophobia</h3><div class="stars">★★★★☆</div><p>⏱ 24.3 hours</p></div></div></div>
+    <div class="card"><div class="card-inner"><img src="images/pubg.jpg"><div class="card-content"><h3>PUBG</h3><div class="stars">★★★★★</div><p>⏱ 385 hours</p></div></div></div>
+    <div class="card"><div class="card-inner"><img src="images/rust.jpg"><div class="card-content"><h3>Rust</h3><div class="stars">★★★★★</div><p>⏱ 192 hours</p></div></div></div>
+    <div class="card"><div class="card-inner"><img src="images/scum.jpg"><div class="card-content"><h3>SCUM 🔥</h3><div class="stars">★★★★★</div><p>⏱ 1955 hours</p></div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-content"><h3>World of Tanks</h3><div class="stars">★★★★☆</div><p>🎖 12 years experience</p></div></div></div>
+
+    <!-- Total playtime -->
+    <div class="card"><div class="card-inner"><div class="card-content"><h3>📊 Total Playtime</h3><p id="totalHours">Calculating...</p></div></div></div>
+
+  </div>
+</section>
+
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const music = document.getElementById('music');
+const overlay = document.getElementById('startOverlay');
+
+overlay.addEventListener('click', () => {
+  music.play().catch(()=>{});
+  overlay.style.display = 'none';
+});
+
+// scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+window.addEventListener('scroll', () => {
+  reveals.forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
+  });
+});
+
+// tilt effect
+const cards = document.querySelectorAll('.card');
+cards.forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
+    const rx = -(y - r.height/2)/10;
+    const ry = (x - r.width/2)/10;
+    card.querySelector('.card-inner').style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.querySelector('.card-inner').style.transform = 'rotateX(0) rotateY(0)';
+  });
+});
+
+// particles
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+canvas.width = innerWidth; canvas.height = innerHeight;
+let particles = Array.from({length:100}, () => ({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2,d:Math.random()}));
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle='white'; ctx.beginPath();
+  particles.forEach(p=>{ctx.moveTo(p.x,p.y);ctx.arc(p.x,p.y,p.r,0,Math.PI*2);});
+  ctx.fill();
+  particles.forEach(p=>{p.y+=p.d; if(p.y>canvas.height){p.y=0;p.x=Math.random()*canvas.width;}});
+}
+setInterval(draw,33);
+
+// cursor
+const cursor = document.querySelector('.cursor');
+const glow = document.querySelector('.cursor-glow');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = glow.style.left = e.clientX + 'px';
+  cursor.style.top = glow.style.top = e.clientY + 'px';
+});
+
+// total hours
+let total = 0;
+document.querySelectorAll('.card').forEach(card => {
+  let m = card.innerText.match(/(\d+\.?\d*)\s*hours/);
+  if(m) total += parseFloat(m[1]);
+});
+document.getElementById('totalHours').innerText = Math.round(total) + '+ hours';
+</script>
+
+</body>
+</html>
